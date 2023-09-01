@@ -5,7 +5,6 @@ public class Airline {
     private String name;
     private String identificationCode;
     private String phone;
-    private String serviceClass;
     private ArrayList<Plane> aircraftFleet = new ArrayList<>();
     private ArrayList<Flight> flightList = new ArrayList<>();
     
@@ -33,10 +32,14 @@ public class Airline {
 
     public String getName() {
         return name;
-        
-        
-        
+    }
+
+    @Override
+    public String toString() {
+        return "\nNombre: " + name 
+                + "\nCódigo de identificación: " + identificationCode 
+                + "\nTelefono: " + phone;
     }
     
-            
+     
 }

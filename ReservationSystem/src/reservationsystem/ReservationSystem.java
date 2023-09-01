@@ -1,6 +1,5 @@
 package reservationsystem;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import java.util.Iterator;
@@ -11,37 +10,57 @@ public class ReservationSystem {
     
         ArrayList<Airline> listaAerolinea = new ArrayList<>();
         
-        
-        int opcion;
+        int opcion = 0;
         
         do{
-            opcion = Integer.parseInt(JOptionPane.showInputDialog("1. Crear Aerolinea\n 2. Crear vuelo \n 3. Crear Pasajero \n Elige una opción:"));
-            
+            try {
+                opcion = Integer.parseInt(JOptionPane.showInputDialog("""
+                                                                      Menu
+                                                                      1. Crear Aerolinea
+                                                                      2. Crear vuelo
+                                                                      3. Crear Pasajero
+                                                                      4. Salir
+                                                                      Elige una opción:"""));
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null ,"Debes ingresar un numero entero valido");
+            }
             switch(opcion){
-                case 1: {
+                case 1 ->  {
                     String name, identificationCode, phone;
                     name = JOptionPane.showInputDialog("Ingresar nombre de la aerolinea");
                     identificationCode = JOptionPane.showInputDialog("Ingresar código de identificación de la aerolinea");
                     phone = JOptionPane.showInputDialog("Ingresar Telefono de la aerolinea");
                     
-                    Airline aLinea = new Airline(name, identificationCode, phone);
+                    listaAerolinea.add(new Airline(name, identificationCode, phone));
                 }
                 
-                case 2: {
-                    
+                case 2 ->  {
+                    Iterator<Airline> itAerolinea = listaAerolinea.iterator();
+                    int i = 1;
+                    String aerolineas = "";
+                    if(listaAerolinea.isEmpty()){
+                        JOptionPane.showMessageDialog(null, "No hay aerolineas registradas");
+                    }else{
+                        while(itAerolinea.hasNext()) {
+                            aerolineas += "Aerolinea #" + i + ": " + itAerolinea.next().toString()+ "\n\n";
+                            i++;
+                        }
+                        opcion = Integer.parseInt(JOptionPane.showInputDialog(aerolineas + "Ingresar número de aerolinea para agregar vuelo: "));
+                    }
                 }
                 
-                case 3: {
-                    
+                case 3 ->  {
                 }
                 
-                default: {
-                    
+                case 4 ->  {
+                    JOptionPane.showMessageDialog(null ,"Proceso terminado");
+                }
+                
+                default -> {
+                     JOptionPane.showMessageDialog(null ,"La opcion ingresada no esta en el menu");
                 }
                 
             }
-            
-        }while(opcion != 0); 
-   
+        }while(opcion != 4); 
     }
 }
