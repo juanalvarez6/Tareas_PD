@@ -1,5 +1,6 @@
 package reservationsystem;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Airline {
     private String name;
@@ -25,6 +26,23 @@ public class Airline {
         }
         return null;
     }
+    
+    public void addPlane(){
+        int opcion = 0, capacity;
+        String serialNumber, planeModel;
+        try{
+            opcion = Integer.parseInt(JOptionPane.showInputDialog("Ingresar cuantos aviones desea agregar a la aerolinea"));
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null ,"Debes ingresar un numero entero valido");
+        }
+        for(int i=1; i <= opcion; i++){
+            serialNumber = JOptionPane.showInputDialog("Ingresar numero de serie del avion");
+            planeModel = JOptionPane.showInputDialog("Ingresar modelo del avion");
+            capacity = Integer.parseInt(JOptionPane.showInputDialog("Ingresar capacidad del avion"));
+            aircraftFleet.add(new Plane(serialNumber, planeModel, capacity));
+        }
+        JOptionPane.showMessageDialog(null ,"Aviones ingresados");
+    }
 
     public ArrayList<Flight> getFlightList() {
         return flightList;
@@ -34,12 +52,14 @@ public class Airline {
         return name;
     }
 
+    public ArrayList<Plane> getAircraftFleet() {
+        return aircraftFleet;
+    }
+
     @Override
     public String toString() {
         return "\nNombre: " + name 
                 + "\nCódigo de identificación: " + identificationCode 
                 + "\nTelefono: " + phone;
-    }
-    
-     
+    } 
 }

@@ -32,6 +32,8 @@ public class ReservationSystem {
                     phone = JOptionPane.showInputDialog("Ingresar Telefono de la aerolinea");
                     
                     listaAerolinea.add(new Airline(name, identificationCode, phone));
+                    
+                    JOptionPane.showMessageDialog(null ,"Ahora por favor ingresa los aviones que va a tener la aerolinea");
                 }
                 
                 case 2 ->  {
