@@ -5,21 +5,20 @@ public class Flight {
     private String origin;
     private String destination;
     private String classFlight;
-    private int year;
-    private int month;
-    private int day;
+    private String fecha;
     private String hora;
     private Plane plane;
 
-    public Flight(String flightCode, String origin, String destination, String classFlight, int year, int month, int day, String hora, Plane plane) {
+    public Flight(String flightCode, String origin, String destination, String classFlight,String fecha, String hora) {
         this.flightCode = flightCode;
         this.origin = origin;
         this.destination = destination;
         this.classFlight = classFlight;
-        this.year = year;
-        this.month = month;
-        this.day = day;
+        this.fecha = fecha;
         this.hora = hora;
+    }
+
+    public void setPlane(Plane plane) {
         this.plane = plane;
     }
 
@@ -29,6 +28,6 @@ public class Flight {
                 + "\n  Origen: " + origin 
                 + "\n  Destino: " + destination 
                 + "\n  Clase: " + classFlight
-                + "\n  Fecha y hora: " + year + "/" + month + "/" + day + " " + hora;
+                + "\n  Fecha y hora: " + fecha + " "+ hora;
     }
 }

@@ -26,4 +26,11 @@ public class Plane {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
+
+    @Override
+    public String toString() {
+        return  "Numero de serie: " + serialNumber 
+                + "\nModelo avion: " + planeModel 
+                + "Capacidad de avion: " + capacity;
+    }
 }

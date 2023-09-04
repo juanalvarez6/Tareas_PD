@@ -1,5 +1,6 @@
 package reservationsystem;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 public class Airline {
@@ -15,16 +16,29 @@ public class Airline {
         this.phone = phone;
     }
     
-    public Flight createFlight(String flightCode, String origin, String destination, String classFlight, int year, int month, int day, String hora, Plane plane){
+    public void addFlight(){
         if(!aircraftFleet.isEmpty()){
-            return new Flight(flightCode, origin, destination, classFlight, year, month, day, hora, plane);
-        }else{
-            try{     
-            }catch(Exception e){
-                System.out.println("!No hay aviones disponibles");
+            String flightCode, origin, destination, classFlight, fecha, hora;
+            flightCode = JOptionPane.showInputDialog("Ingresar código del vuelo");
+            origin = JOptionPane.showInputDialog("Ingresar origen del vuelo");
+            destination = JOptionPane.showInputDialog("Ingresar destino del vuelo");
+            classFlight = JOptionPane.showInputDialog("Ingresar clase del vuelo");
+            fecha = JOptionPane.showInputDialog("Ingresar fecha del vuelo en formato \"dd/mm/aa\"");
+            hora = JOptionPane.showInputDialog("Ingresar hora del vuelo en formato de 24 horas \"HH:MM\"");
+            flightList.add(new Flight(flightCode, origin,destination, classFlight, fecha, hora));
+            int ultimoElemeto = flightList.size() - 1;
+            int i = 1, opcion;
+            String planes = "";
+            Iterator<Plane> itPlane = aircraftFleet.iterator();
+            while(itPlane.hasNext()) {
+                planes += "Avión #" + i + ": " + itPlane.next().toString()+ "\n\n";
+                i++;
             }
+            opcion = Integer.parseInt(JOptionPane.showInputDialog(planes + "Ingresar número de avion para asignarlo al vuelo: "));
+            flightList.get(ultimoElemeto).setPlane(aircraftFleet.get(opcion - 1));
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay aviones disponibles para asignarlo a un vuelo");
         }
-        return null;
     }
     
     public void addPlane(){

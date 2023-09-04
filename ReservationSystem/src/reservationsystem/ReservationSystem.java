@@ -18,7 +18,7 @@ public class ReservationSystem {
                                                                       Menu
                                                                       1. Crear Aerolinea
                                                                       2. Crear vuelo
-                                                                      3. Crear Pasajero
+                                                                      3. Reservar vuelo
                                                                       4. Salir
                                                                       Elige una opción:"""));
             }catch(NumberFormatException e){
@@ -34,6 +34,8 @@ public class ReservationSystem {
                     listaAerolinea.add(new Airline(name, identificationCode, phone));
                     
                     JOptionPane.showMessageDialog(null ,"Ahora por favor ingresa los aviones que va a tener la aerolinea");
+                    int ultimoElmento = listaAerolinea.size() - 1;
+                    listaAerolinea.get(ultimoElmento).addPlane();
                 }
                 
                 case 2 ->  {
@@ -47,7 +49,8 @@ public class ReservationSystem {
                             aerolineas += "Aerolinea #" + i + ": " + itAerolinea.next().toString()+ "\n\n";
                             i++;
                         }
-                        opcion = Integer.parseInt(JOptionPane.showInputDialog(aerolineas + "Ingresar número de aerolinea para agregar vuelo: "));
+                        opcion = Integer.parseInt(JOptionPane.showInputDialog(aerolineas + "Ingresar número de aerolinea para agregar un vuelo: "));
+                        listaAerolinea.get(opcion - 1).addFlight();
                     }
                 }
                 
