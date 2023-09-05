@@ -18,7 +18,7 @@ public class ReservationSystem {
                                                                       Menu
                                                                       1. Crear Aerolinea
                                                                       2. Crear vuelo
-                                                                      3. Reservar vuelo
+                                                                      3. Ver Aerolineas
                                                                       4. Salir
                                                                       Elige una opción:"""));
             }catch(NumberFormatException e){
@@ -55,6 +55,15 @@ public class ReservationSystem {
                 }
                 
                 case 3 ->  {
+                    Iterator<Airline> itAerolinea = listaAerolinea.iterator();
+                    int i = 1;
+                    String aerolineas = "";
+                    while(itAerolinea.hasNext()) {
+                        aerolineas += "Aerolinea #" + i + ": " + itAerolinea.next().toString()+ "\n\n";
+                        i++;
+                    }
+                    opcion = Integer.parseInt(JOptionPane.showInputDialog(aerolineas + "Ingresar número de aerolinea en la cual desea reservar un vuelo: "));
+                    listaAerolinea.get(opcion - 1).reserveFlight();
                 }
                 
                 case 4 ->  {

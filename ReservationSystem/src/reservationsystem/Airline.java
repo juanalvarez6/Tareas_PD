@@ -57,8 +57,19 @@ public class Airline {
         }
         JOptionPane.showMessageDialog(null ,"Aviones ingresados");
     }
+    
+    public void reserveFlight(){
+        Iterator<Flight> itFlight = flightList.iterator();
+        int i = 1, opcion;
+        String vuelos = "";
+        while(itFlight.hasNext()) {
+            vuelos += "Vuelo #" + i + ": " + itFlight.next().toString()+ "\n\n";
+            i++;
+        }
+        opcion = Integer.parseInt(JOptionPane.showInputDialog(vuelos + "Ingresar número de vuelo que desea reservar: "));
+    }
 
-    public ArrayList<Flight> getFlightList() {
+    public ArrayList<Flight> getFlightList(){
         return flightList;
     }
 
