@@ -1,5 +1,7 @@
 package reservationsystem;
 
+import javax.swing.JOptionPane;
+
 public class Plane {
     private String serialNumber;
     private String planeModel;
@@ -9,6 +11,15 @@ public class Plane {
         this.serialNumber = serialNumber;
         this.planeModel = planeModel;
         this.capacity = capacity;
+    }
+    
+    public int subtractCapacity(int pasajeros){
+        if(capacity  <= 0){
+            JOptionPane.showMessageDialog(null ,"No hay asientos disponibles");
+            return capacity;
+        }else{
+            return capacity - pasajeros;
+        }
     }
 
     public String getSerialNumber() {

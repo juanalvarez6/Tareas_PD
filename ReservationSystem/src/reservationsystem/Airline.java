@@ -9,6 +9,7 @@ public class Airline {
     private String phone;
     private ArrayList<Plane> aircraftFleet = new ArrayList<>();
     private ArrayList<Flight> flightList = new ArrayList<>();
+    private ArrayList<People> peopleList = new ArrayList<>();
     
     public Airline(String name, String identificationCode, String phone){
         this.name = name;
@@ -49,8 +50,8 @@ public class Airline {
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null ,"Debes ingresar un numero entero valido");
         }
-        for(int i=1; i <= opcion; i++){
-            serialNumber = JOptionPane.showInputDialog("Ingresar numero de serie del avion");
+        for(int i = 1; i <= opcion; i++){
+            serialNumber = JOptionPane.showInputDialog("Ingresar numero de serie del avion #" + i);
             planeModel = JOptionPane.showInputDialog("Ingresar modelo del avion");
             capacity = Integer.parseInt(JOptionPane.showInputDialog("Ingresar capacidad del avion"));
             aircraftFleet.add(new Plane(serialNumber, planeModel, capacity));
@@ -59,18 +60,44 @@ public class Airline {
     }
     
     public void reserveFlight(){
-        Iterator<Flight> itFlight = flightList.iterator();
-        int i = 1, opcion;
-        String vuelos = "";
-        while(itFlight.hasNext()) {
-            vuelos += "Vuelo #" + i + ": " + itFlight.next().toString()+ "\n\n";
-            i++;
+        if(!flightList.isEmpty()){
+            Iterator<Flight> itFlight = flightList.iterator();
+            int i = 1, opcion;
+            String vuelos = "";
+            while(itFlight.hasNext()) {
+                vuelos += "Vuelo #" + i + ": " + itFlight.next().toString()+ "\n\n";
+                i++;
+            }
+            opcion = Integer.parseInt(JOptionPane.showInputDialog(vuelos + "Ingresar número de vuelo que desea reservar: "));
+            
+            
+            String names, surnames, mail, cellphone;
+            int age;
+            names = JOptionPane.showInputDialog("Ingresar nombres del pasajero");
+            surnames = JOptionPane.showInputDialog("Ingresar apellidos del pasajero");
+            mail = JOptionPane.showInputDialog("Ingresar correo electronico");
+            cellphone = JOptionPane.showInputDialog("Ingresar número de celular");
+            age = Integer.parseInt(JOptionPane.showInputDialog("Ingresar edad de pasajero"));
+            Flight flight = flightList.get(opcion - 1);
+            flight.getPlane().subtractCapacity(1);
+            peopleList.add(new People(names, surnames, mail, cellphone, age, flight));
+            int ultimoElemento = peopleList.size() - 1;
+            JOptionPane.showMessageDialog(null ,"Información de reserva: \n" + peopleList.get(ultimoElemento).toString() + "\n\n");
+        }else{
+            JOptionPane.showMessageDialog(null ,"No hay vuelos registrados para reservar");
         }
-        opcion = Integer.parseInt(JOptionPane.showInputDialog(vuelos + "Ingresar número de vuelo que desea reservar: "));
     }
 
     public ArrayList<Flight> getFlightList(){
         return flightList;
+    }
+
+    public ArrayList<People> getPeopleList() {
+        return peopleList;
+    }
+
+    public void setPeopleList(ArrayList<People> peopleList) {
+        this.peopleList = peopleList;
     }
 
     public String getName() {

@@ -18,6 +18,14 @@ public class People {
         this.flight = flight;
     }
 
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
     @Override
     public String toString() {
         return "\nNombres: " + names 

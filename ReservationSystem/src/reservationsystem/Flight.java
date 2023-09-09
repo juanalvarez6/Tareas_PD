@@ -21,6 +21,20 @@ public class Flight {
     public void setPlane(Plane plane) {
         this.plane = plane;
     }
+    
+    public Plane getPlane(){
+        return plane;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+    
+    
 
     @Override
     public String toString() {

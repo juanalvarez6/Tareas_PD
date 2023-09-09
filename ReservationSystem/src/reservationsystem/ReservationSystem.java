@@ -9,6 +9,7 @@ public class ReservationSystem {
     public static void main(String[] args) {
     
         ArrayList<Airline> listaAerolinea = new ArrayList<>();
+        ArrayList<Flight> listaVuelos = new ArrayList<>();
         
         int opcion = 0;
         
@@ -18,8 +19,10 @@ public class ReservationSystem {
                                                                       Menu
                                                                       1. Crear Aerolinea
                                                                       2. Crear vuelo
-                                                                      3. Ver Aerolineas
-                                                                      4. Salir
+                                                                      3. Reservar vuelo
+                                                                      4. Ver vuelos
+                                                                      5. Ver aerolineas
+                                                                      6. Salir
                                                                       Elige una opción:"""));
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(null ,"Debes ingresar un numero entero valido");
@@ -66,15 +69,53 @@ public class ReservationSystem {
                     listaAerolinea.get(opcion - 1).reserveFlight();
                 }
                 
-                case 4 ->  {
+                case 4 -> {
+                    Iterator<Airline> itAerolinea = listaAerolinea.iterator();
+                    int i = 1;
+                    String aerolineas = "";
+                    while(itAerolinea.hasNext()) {
+                        aerolineas += "Aerolinea #" + i + ": " + itAerolinea.next().toString()+ "\n\n";
+                        i++;
+                    }
+                    opcion = Integer.parseInt(JOptionPane.showInputDialog(aerolineas + "Ingresar número de aerolinea en la cual desea ver los vuelos disponibles: "));
+                    listaVuelos = listaAerolinea.get(opcion - 1).getFlightList();
+                    Iterator<Flight> itVuelos = listaVuelos.iterator();
+                    i = 1;
+                    String vuelos = "";
+                    while(itVuelos.hasNext()) {
+                        vuelos += "vuelo #" + i + ": " + itVuelos.next().toString()+ "\n\n";
+                        i++;
+                    }
+                    if("".equals(vuelos)){
+                        JOptionPane.showMessageDialog(null , "No hay vuelos registrados en esta aerolinea");
+                    }else{
+                       JOptionPane.showMessageDialog(null , vuelos); 
+                    }
+                }
+                
+                case 5 -> {
+                    Iterator<Airline> itAerolinea = listaAerolinea.iterator();
+                    int i = 1;
+                    String aerolineas = "";
+                    if(listaAerolinea.isEmpty()){
+                        JOptionPane.showMessageDialog(null , "No hay aerolinea registradas");
+                    }else{
+                        while(itAerolinea.hasNext()) {
+                            aerolineas += "Aerolinea #" + i + ": " + itAerolinea.next().toString()+ "\n\n";
+                            i++;
+                        }
+                        JOptionPane.showMessageDialog(null , aerolineas);
+                    }
+                }
+                
+                case 6 ->  {
                     JOptionPane.showMessageDialog(null ,"Proceso terminado");
                 }
                 
                 default -> {
-                     JOptionPane.showMessageDialog(null ,"La opcion ingresada no esta en el menu");
+                    JOptionPane.showMessageDialog(null ,"La opcion ingresada no esta en el menu");
                 }
-                
             }
-        }while(opcion != 4); 
+        }while(opcion != 6); 
     }
 }
